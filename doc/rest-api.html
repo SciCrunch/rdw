@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Concept Mapper Web Services</title>
+
+  <style>
+  .header {
+        display : block;
+        text-decoration: none;
+        color: #222;
+        background:#eee;
+        padding: 5px 0px 5px 0px;
+        margin:30px 0 10px 0;
+        border-top: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+      }
+
+ body {
+     font:12px Verdana,Geneva,sans-serif;
+   }
+   .source {
+      padding: 12px;
+      margin: 1em 7px 1em 7px;
+      border: 1px solid #999;
+      overflow:auto;
+      background-color: #ffffcc;
+      color: #003;
+
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      -moz-box-shadow: 5px 5px 5px gray;
+      -webkit-box-shadow: 5px 5px 5px gray;
+      box-shadow: 5px 5px 5px gray;
+     }
+  </style>
+
+</head>
+
+<body>
+   <h2 class="header">Resource Disambiguator Web (RDW)  REST Web Services</h2>
+   <h3 class="header">Web service to get all papers refering to registry resources  (GET) (url matching path only)</h3>
+
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resourceRefs
+</pre></div>
+
+<h4>output example</h4>
+<div class="source"><pre>
+&lt;resourceRefs count="42472"&gt;
+   &lt;row&gt;
+      &lt;url&gt;http://www.brain-map.org&lt;/url&gt;
+     &lt;pmid&gt;22164138&lt;/pmid&gt;
+     &lt;batchId&gt;201310&lt;/batchId&gt;
+     &lt;resourceName&gt;Allen Institute for Brain Science&lt;/resourceName&gt;
+     &lt;nifId&gt;nif-0000-00146&lt;/nifId&gt;
+  &lt;/row&gt;
+ ...
+&lt;/resourceRefs&gt;
+</pre></div>
+
+<h3 class="header">Web service for registry sites that are down at the last check (GET)</h3>
+
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/validationStatus
+</pre></div>
+
+<h4>Output example</h4>
+
+<div class="source"><pre>
+&lt;downSites count="1403"&gt;
+ &lt;row&gt;
+   &lt;nifId&gt;nif-0000-10987&lt;/nifId&gt;
+   &lt;resource&gt;Gene Atlas&lt;/resource&gt;
+   &lt;url&gt;http://www.geneatlas.org/gene/main.jsp&lt;/url&gt;
+   &lt;lastCheckedTime&gt;2013-12-12 17:30:08.0&lt;/lastCheckedTime&gt;
+   &lt;message&gt;Connection to http://www.geneatlas.org refused&lt;/message&gt;
+ &lt;/row&gt;
+ ....
+&lt;/downSites&gt;
+</pre></div>
+
+
+<h3 class="header">Get mentions (PMIDs) for a resource say 'Allen Institute for Brain Science' (GET)</h3>
+
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resource
+</pre></div>
+
+<h4>Params</h4>
+<ul>
+<li>nifId</li>
+<li>max [OPTIONAL]
+<li>offset [OPTIONAL]</li>
+</ul>
+<h4>Example Usage</h4>
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resource/pmids?nifId=nif-0000-00146&max=10&offset=10
+</pre></div>
+
+<h3 class="header">Get context for a specific paper</h3>
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resource
+</pre></div>
+
+<h4>Params</h4>
+<ul>
+<li>nifId</li>
+<li>pmid</li>
+</ul>
+
+<h4>Example Usage</h4>
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resource/pmid/context?nifId=nif-0000-00146&pmid=20663923
+</pre></div>
+
+
+<h3 class="header">Save thumbs up/down info (POST)</h3>
+
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resource/annot/save
+</pre></div>
+
+<h4>Params</h4>
+<ul>
+<li>nifId</li>
+<li>pmid</li>
+<li>label [good|bad]</li>
+</ul>
+<h4>Example Usage</h4>
+<div class="source"><pre>
+curl --data "nifId=nif-0000-00146&pmid=20663923&label=good" http://lucene1.neuinfo.org:8080/rdw/service/resource/annot/save
+</pre></div>
+
+<h3 class="header">Add a new paper (POST)</h3>
+
+<div class="source"><pre>
+http://lucene1.neuinfo.org:8080/rdw/service/resource/paper/add
+</pre></div>
+
+<h4>Params</h4>
+<ul>
+<li>nifId</li>
+<li>pmid</li>
+<li>title [OPTIONAL] paper title</li>
+<li>journalTitle [Optional] Journal Name</li>
+</ul>
+
+<h4>Example Usage</h4>
+
+<div class="source"><pre>
+curl --data "nifId=nif-0000-00146&pmid=99999&title=Testing" http://lucene1.neuinfo.org:8080/rdw/service/resource/paper/add
+</pre></div>
+</body>
+</html>
