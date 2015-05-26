@@ -68,6 +68,6 @@ environments {
 
 You need to create at least one user called admin with role 'admin' in the `rd_user` database table. 
 All curator users will have the role 'curator' in the `rd_user` table. i
-After that, you need to copy `$HOME/rdw/rdw.war` to the `webapps` directory of your servlet container (e.g. Tomcat) and start it. i
+After that, you need to copy `$HOME/rdw/rdw.war` to the `webapps` directory of your servlet container (e.g. Tomcat) and start it. 
 To login, point your browser to `http://localhost:8080/rdw/`.
 
