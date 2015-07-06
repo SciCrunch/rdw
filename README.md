@@ -6,6 +6,7 @@ Prerequisites
  * Java 1.6+
  * Grails 2.3.8 
  * Postgres 8+
+ * SVMLight (http://svmlight.joachims.org/)
  * resource_disambiguator (https://github.com/SciCrunch/resource_disambiguator.git)
 
 
